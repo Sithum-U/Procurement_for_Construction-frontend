@@ -22,7 +22,7 @@ const Products = (props) => {
 			          <article className="single-product-info">
 			            <div>
 			              <h2 className="single-product-title">{title}</h2>
-			              <p className="single-product-company text-slanted">by marcos</p>
+			              {/* <p className="single-product-company text-slanted">by marcos</p> */}
 			              <span className="single-product-price">${price}</span>
 			              <div className="single-product-colors">
 			                <span className="product-color" />
@@ -45,7 +45,7 @@ const Products = (props) => {
 							    <option value="10">10</option>
 							</select>
 			              </p>
-			              <button className="addToCartBtn btn" data-id="id" onClick={() => addToCartHandle(productDetails)}>add to cart</button>
+			              <button className="addToCartBtn btn" data-id="id" onClick={() => addToCartHandle(productDetails)}>Request</button>
 			            </div>
 			          </article>
 			        </div>

@@ -374,7 +374,7 @@ Hero
 }
 /* add to globals */
 .text-slanted {
-  font-family: 'Kaushan Script', cursive;
+  font-family: 'calibri';
 }
 .hero h1 {
   font-weight: bolder;
@@ -461,7 +461,7 @@ Featured Products
 .product-icon {
   width: 2.25rem;
   height: 2.25rem;
-  background: var(--primary-500);
+  background: var(--black);
   color: var(--white);
   display: grid;
   place-items: center;
@@ -473,7 +473,8 @@ Featured Products
   margin: 0 0.5rem;
 }
 .product-icon:hover {
-  background: var(--primary-700);
+  background: var(--ash);
+  transform: scale(1.5);
 }
 .product-container:hover .product-icons {
   opacity: 1;

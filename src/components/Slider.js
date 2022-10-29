@@ -23,7 +23,7 @@ const Slider = () => {
 			        <div className="hero-container">
 			        	<SliderSlick {...settings}>
 					      <div>
-					        <img src={slider1} />
+					        <img src={slider1} width="100%"/>
 					      </div>
 					      <div>
 					        <img src={slider2} />

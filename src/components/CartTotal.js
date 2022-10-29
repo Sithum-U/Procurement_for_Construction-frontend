@@ -17,10 +17,16 @@ const CartTotal = () => {
 				<footer>
 		            <h3 className="cart-total text-slanted">total : ${cartTotal}</h3>
 		            {
-		            	cartItems.length > 0 ? 
-		            	<Link to="/shipping" onClick={closeCart}><button className="cart-checkout btn">checkout</button></Link>
+		            	cartItems.length > 0 && cartTotal < 100000 ? 
+		            	<Link to="/shipping" onClick={closeCart}>
+							<button className="cart-checkout btn">checkout</button>
+							</Link>
 		            	:
-		            	""
+						<div>
+							<Link to="/approval" onClick={closeCart}>
+							<button className="cart-checkout btn">get approval</button>
+							</Link>
+						</div>
 		            }
 		          </footer>
 			</>

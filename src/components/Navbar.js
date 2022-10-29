@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import logo from '../images/logo.svg';
+import logo from '../images/logo.png';
 import {showCart} from '../redux/actions/cartActions';
 import { logout } from "../redux/actions/userActions";
 
@@ -47,10 +47,10 @@ const NavBar = () => {
 			            </button>
 			            <ul className="nav-links">
 			              <li>
-			                <Link to="/" className="nav-link"> home </Link>
+			                <Link to="/" className="nav-link"> Home </Link>
 			              </li>
 			              <li>
-			                <Link to="/products" className="nav-link"> products </Link>
+			                <Link to="/products" className="nav-link"> Materials </Link>
 			              </li>
 			              <li>
 			                <Link to="/about" className="nav-link"> about </Link>
@@ -58,7 +58,7 @@ const NavBar = () => {
 			            </ul>
 			          </div>
 			          <div>
-			            <Link to="/"><img src={logo} className="nav-logo" alt="logo" /></Link>
+			            <Link to="/"><img src={logo} className="nav-logo" alt="logo" height="150" width="250" /></Link>
 			          </div>
 			          <div className="auth-section">
 			          	<div className="auth-container">
@@ -84,7 +84,7 @@ const NavBar = () => {
 				        </div>
 			            <div className="toggle-container">
 				          	<button className="toggle-cart" onClick={toggleCart}>
-				              <i className="fas fa-shopping-cart" />
+				              <i class="fa fa-truck" aria-hidden="true"></i>
 				            </button>
 				            <span className="cart-item-count">{cartItemsCount}</span>
 				        </div>				        

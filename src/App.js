@@ -12,6 +12,7 @@ import PrivateRouter from "./PrivateRouter";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Toast from "./components/Toast";
 import 'react-toastify/dist/ReactToastify.css';
+import Approval from './components/Approval';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         	<Route path="/products" component={ProductsPage}/>
         	<Route path="/product/:id" component={ProductDetailPage}/>
           <Route path="/about" component={About}/>
+          <Route path="/approval" component={Approval}/>
           <PrivateRouter path="/shipping" component={Shipping} />
           <PrivateRouter path="/payment" component={Payment} />
           <Route path="/login" component={Login}/>

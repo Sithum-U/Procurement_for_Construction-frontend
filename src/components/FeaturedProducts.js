@@ -26,7 +26,7 @@ const FeaturedProducts = () => {
 				<section className="section featured">
 			        <div className="title">
 			          <span />
-			          <h2>Featured Products</h2>
+			          <h2>Featured Materials</h2>
 			          <span />
 			        </div>
 			        {
@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
 				        </div>
 			        }
 			        
-			        <Link to="/products" className="btn"> all products </Link>
+			        <Link to="/products" className="btn"> all materials </Link>
 			    </section>
 			</>
 		)

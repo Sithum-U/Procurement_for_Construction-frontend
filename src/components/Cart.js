@@ -25,14 +25,14 @@ const Cart = () => {
 			            <i className="fas fa-times" />
 			          </button>
 			          <header>
-			            <h3 className="text-slanted">Shopping Cart</h3>
+			            <h3 className="text-slanted">CART ORDERS</h3>
 			          </header>
 			          {/* cart items */}
 			          <div className="cart-items">
 			          	{
 			          		cartItems.length === 0 ? (
 								<div className="empty-cart">
-									Your cart is empty
+									Your cart order is empty
 								</div>
 			          		):(
 			          			cartItemsList

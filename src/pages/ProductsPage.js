@@ -9,7 +9,7 @@ const ProductsPage = () => {
 	return(
 		<>
 		 	<NavBar/>	
-		 	<PageHeading title="Home / Products"/>
+		 	<PageHeading title="Home / Materials"/>
 		 	<Products/>	
 		 	<Sidebar/>
 		 	<Cart/>
