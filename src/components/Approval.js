@@ -9,7 +9,7 @@ import CartTotal from './CartTotal';
 
 function Approval() {
 
-    const showCartStatus = useSelector((state) => state.cart.showCart);
+    // const showCartStatus = useSelector((state) => state.cart.showCart);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
     const closeCart = () => {

@@ -23,7 +23,7 @@ const Products = (props) => {
 			            <div>
 			              <h2 className="single-product-title">{title}</h2>
 			              {/* <p className="single-product-company text-slanted">by marcos</p> */}
-			              <span className="single-product-price">${price}</span>
+			              <span className="single-product-price">Rs. {price}</span>
 			              <div className="single-product-colors">
 			                <span className="product-color" />
 			                <span className="product-color product-color-red" />
