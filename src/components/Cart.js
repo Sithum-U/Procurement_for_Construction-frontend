@@ -16,7 +16,7 @@ const Cart = () => {
 	const closeCart = () => {
 		dispatch(showCart(false))
 	}
-
+console.log(cartItemsList);
 	return(
 			<>
 				<div className= { 'cart-overlay' + (showCartStatus ? ' show' : '')}>

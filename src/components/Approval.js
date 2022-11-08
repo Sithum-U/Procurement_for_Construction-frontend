@@ -33,7 +33,7 @@ function Approval() {
                                                         <article className="icontext align-items-start">
                                                             <span className="icon icon-sm rounded-circle alert-success"><i className="text-success fa fa-user" /></span>
                                                             <div className="text">
-                                                                <h5 className="card-title mb-2">Site Manager</h5>
+                                                                <h5 className="card-title mb-2">Procument Staff</h5>
                                                                 {/* <p className="mb-1">{order.shippingAddress && order.shippingAddress.customer_name} <br /><a href="mailto:{data[0].email}">{data[0].email}</a></p> */}
                                                             </div>
                                                         </article>
