@@ -47,14 +47,14 @@ const CartTotal = () => {
 
 
 
-//  const history = useHistory()
+ const history = useHistory()
 
 
 //   const [submitted, setSubmitted] = useState(false);
 //   const [btnDisable, setBtnDisable] = useState(false);
-//   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');  
-//   const [showCardPayment, setShowCardPayment] = useState(false); 
-//   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);  
+//   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
+//   const [showCardPayment, setShowCardPayment] = useState(false);
+//   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
 //   const user = userInfo[0]._id;
 
 
@@ -64,7 +64,7 @@ const CartTotal = () => {
 //     style: {
 //       base: {
 //         color: "#303238",
-//         fontSize: "18px"  
+//         fontSize: "18px"
 //       },
 //       invalid: {
 //         color: "#e5424d",
@@ -108,7 +108,7 @@ const CartTotal = () => {
 //   }
 
 //   const [formState,setFormState] = useState({
-//         values:{}       
+//         values:{}
 //     });
 
 //   const handleChange = (event) => {
@@ -125,18 +125,18 @@ const CartTotal = () => {
 //         }));
 //       }
 
-//   let cardElement = null;  
+//   let cardElement = null;
 
 //   const handleSubmit = async (e) => {
 //         e.preventDefault();
-//         setSubmitted(true); 
+//         setSubmitted(true);
 //         setBtnDisable(true);
 
        
 //           if(orderItems && shippingAddress && paymentMethod ){
 //             dispatch(createOrder({orderItems, shippingAddress, paymentMethod, user, itemsPrice, shippingPrice, taxPrice, totalPrice}));
 //               history.push('/');
-//           }  
+//           }
         
 //     }
 
@@ -165,7 +165,23 @@ const CartTotal = () => {
 //           setBtnDisable(true);
 //         }
 //     }
-
+	const cartItems1 = useSelector((state) => state.cart.cartItems);
+	const orderItems = [];
+	const cartItemsList = cartItems.map((product) => {
+		const { name, qty, image, price, id } = product;
+		orderItems.push({
+			name,
+			qty,
+			image,
+			price,
+			product: id,
+		})
+	});
+	function handleSubmit() { 
+		if (cartItems.length === 0) {
+			history.push("/");
+		}
+	}
 
 	
 	return (
@@ -173,13 +189,13 @@ const CartTotal = () => {
 			<footer>
 				<h3 className="cart-total text-slanted">total : Rs. {cartTotal}</h3>
 				{
-					cartItems.length > 0 && cartTotal < 100000 ?
+					cartItems.length >= 0 && cartTotal < 100000 ?
 						<Link to="/shipping" onClick={closeCart}>
 							<button className="cart-checkout btn">checkout</button>
 						</Link>
 						:
-						<form >
-						<button className="cart-checkout btn" >get approval</button>
+						<form onSubmit={ handleSubmit} >
+						<button type = "submit" className="cart-checkout btn" >get approval</button>
 						</form>
 				}
 			</footer>
