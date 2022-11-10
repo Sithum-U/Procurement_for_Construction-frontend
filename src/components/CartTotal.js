@@ -1,207 +1,204 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link,useHistory } from 'react-router-dom';
-import { createOrder, processPayment } from '../redux/actions/orderActions';
-import { showCart } from '../redux/actions/cartActions';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { createOrder, processPayment } from "../redux/actions/orderActions";
+import { showCart } from "../redux/actions/cartActions";
 import axios from "axios";
-import { approval } from '../redux/actions/approvalAction';
+import { approval } from "../redux/actions/approvalAction";
 
 const CartTotal = () => {
-	const cart = useSelector((state) => state.cart);
-	const { cartItems } = cart;
-	const cartTotal = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
-	const [name, setName] = useState("");
-	const [price, setPrice] = useState("");
-	const [quantity, setQuantity] = useState("");
-	const [total, setTotal] = useState("");
-	const dispatch = useDispatch();
-	const closeCart = () => {
-		dispatch(showCart(false))
-	}
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const cartTotal = cartItems
+    .reduce((a, i) => a + i.qty * i.price, 0)
+    .toFixed(2);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [total, setTotal] = useState("");
+  const dispatch = useDispatch();
+  const closeCart = () => {
+    dispatch(showCart(false));
+  };
 
-	// const approvalHandle = () => {
-	// 	dispatch(approval());
-	// }
+  // const approvalHandle = () => {
+  // 	dispatch(approval());
+  // }
 
-	const approvalHandle = () => {
-		const url = 'http://localhost:5002/cartitems'
-		const credentials = { name, price, quantity, total }
-		axios.post(url, credentials)
-			.then(response => {
-				const result = response.data;
-				const { status, message } = result;
-				if (status !== 'SUCCESS') {
-					dispatch(approval());
-				}
-				else {
-					alert(message);
-					//window.location.reload();
-				}
-			})
-			.catch(err => {
-				console.log(err);
-			})
-	}
-	// console.log(cartItems);
+  const approvalHandle = () => {
+    const url = "http://localhost:5002/cartitems";
+    const credentials = { name, price, quantity, total };
+    axios
+      .post(url, credentials)
+      .then((response) => {
+        const result = response.data;
+        const { status, message } = result;
+        if (status !== "SUCCESS") {
+          dispatch(approval());
+        } else {
+          alert(message);
+          //window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // console.log(cartItems);
 
+  const history = useHistory();
 
+  //   const [submitted, setSubmitted] = useState(false);
+  //   const [btnDisable, setBtnDisable] = useState(false);
+  //   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
+  //   const [showCardPayment, setShowCardPayment] = useState(false);
+  //   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
+  //   const user = userInfo[0]._id;
 
+  //   const cardElementOptions = {
+  //     hidePostalCode: true,
+  //     style: {
+  //       base: {
+  //         color: "#303238",
+  //         fontSize: "18px"
+  //       },
+  //       invalid: {
+  //         color: "#e5424d",
+  //         ":focus": {
+  //           color: "#303238"
+  //         }
+  //       }
+  //     }
+  //   };
 
- const history = useHistory()
+  //   const shippingAddress = useSelector((state) => state.cart.shippingAddress);
+  //   const { street1, street2, city, state, zip, country } = shippingAddress;
 
+  //   //const cart = useSelector((state) => state.cart);
+  //   const cartItems1 = useSelector((state)=> state.cart);
+  //   const orderItems = [];
+  //   {cart ? cart.map((product)=>{
+  //   const {name,qty,image,price, id} = product;
+  //     orderItems.push({
+  //         name,
+  //         qty,
+  //         image,
+  //         price,
+  //         product: id,
+  //       })
+  //   }): <></>}
 
-//   const [submitted, setSubmitted] = useState(false);
-//   const [btnDisable, setBtnDisable] = useState(false);
-//   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
-//   const [showCardPayment, setShowCardPayment] = useState(false);
-//   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
-//   const user = userInfo[0]._id;
+  //   const itemsPrice = orderItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
+  //   const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  //   const taxPrice = (0.15 * itemsPrice).toFixed(2);
+  //   const totalPrice = ((parseFloat(itemsPrice) + parseFloat(shippingPrice) + parseFloat(taxPrice)) * 100).toFixed();
 
+  //   //Redirect to shipping page if address is not filled
+  //   if (cartItems.length === 0) {
+  //     history.push("/");
+  //   }
 
+  //   //Redirect to shipping page if address is not filled
+  //   if (Object.keys(shippingAddress).length === 0) {
+  //     history.push("/shipping");
+  //   }
 
-//   const cardElementOptions = {
-//     hidePostalCode: true,
-//     style: {
-//       base: {
-//         color: "#303238",
-//         fontSize: "18px"
-//       },
-//       invalid: {
-//         color: "#e5424d",
-//         ":focus": {
-//           color: "#303238"
-//         }
-//       }
-//     }
-//   };
+  //   const [formState,setFormState] = useState({
+  //         values:{}
+  //     });
 
-//   const shippingAddress = useSelector((state) => state.cart.shippingAddress);
-//   const { street1, street2, city, state, zip, country } = shippingAddress;
+  //   const handleChange = (event) => {
+  //         setFormState(formState =>({
+  //           ...formState,
+  //           values:{
+  //             ...formState.values,
+  //             [event.target.name]:
+  //             event.target.type === 'checkbox'
+  //                 ? event.target.checked
+  //                 : event.target.value
+  //           }
 
-//   //const cart = useSelector((state) => state.cart);
-//   const cartItems1 = useSelector((state)=> state.cart);
-//   const orderItems = [];
-//   {cart ? cart.map((product)=>{
-//   const {name,qty,image,price, id} = product;
-//     orderItems.push({
-//         name,
-//         qty,
-//         image,
-//         price,
-//         product: id,
-//       })
-//   }): <></>}
+  //         }));
+  //       }
 
-//   const itemsPrice = orderItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
-//   const shippingPrice = itemsPrice > 100 ? 0 : 10;
-//   const taxPrice = (0.15 * itemsPrice).toFixed(2);
-//   const totalPrice = ((parseFloat(itemsPrice) + parseFloat(shippingPrice) + parseFloat(taxPrice)) * 100).toFixed();
+  //   let cardElement = null;
 
-//   //Redirect to shipping page if address is not filled
-//   if (cartItems.length === 0) {
-//     history.push("/");
-//   }
+  //   const handleSubmit = async (e) => {
+  //         e.preventDefault();
+  //         setSubmitted(true);
+  //         setBtnDisable(true);
 
-//   //Redirect to shipping page if address is not filled
-//   if (Object.keys(shippingAddress).length === 0) {
-//     history.push("/shipping");
-//   }
+  //           if(orderItems && shippingAddress && paymentMethod ){
+  //             dispatch(createOrder({orderItems, shippingAddress, paymentMethod, user, itemsPrice, shippingPrice, taxPrice, totalPrice}));
+  //               history.push('/');
+  //           }
 
-//   const [formState,setFormState] = useState({
-//         values:{}
-//     });
+  //     }
 
-//   const handleChange = (event) => {
-//         setFormState(formState =>({
-//           ...formState,
-//           values:{
-//             ...formState.values,
-//             [event.target.name]:
-//             event.target.type === 'checkbox'
-//                 ? event.target.checked
-//                 : event.target.value
-//           }
-          
-//         }));
-//       }
+  //     const changePaymentMethod = (e) =>{
+  //       if(e.target.value === 'card'){
+  //         setShowCardPayment(true);
+  //         setPaymentMethod('Card')
+  //       }else{
+  //         setShowCardPayment(false);
+  //         setPaymentMethod('Cash on Delivery')
+  //       }
+  //     }
 
-//   let cardElement = null;
+  //     const handleCardError = (event) => {
+  //         let displayError = document.getElementById('card-errors');
+  //         if (event.error) {
+  //             displayError.textContent = event.error.message;
+  //         } else {
+  //             displayError.textContent = '';
+  //         }
 
-//   const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setSubmitted(true);
-//         setBtnDisable(true);
+  //         if(event.complete){
+  //           setBtnDisable(false);
+  //         }else{
+  //           setBtnDisable(true);
+  //         }
+  //     }
 
-       
-//           if(orderItems && shippingAddress && paymentMethod ){
-//             dispatch(createOrder({orderItems, shippingAddress, paymentMethod, user, itemsPrice, shippingPrice, taxPrice, totalPrice}));
-//               history.push('/');
-//           }
-        
-//     }
+  function handleSubmit() {
+    const cartObj = {
+      name,
+      //   qty,
+      //   image,
+      //   price,
+      //   product: id,
+    };
+    axios
+      .post("https://localhost:5002/cartitems/", cartObj)
+      .then((res) => {
+        alert("Cart Details Added");
+        setName("");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        alert(error.message);
+      });
+  }
 
-//     const changePaymentMethod = (e) =>{
-//       if(e.target.value === 'card'){
-//         setShowCardPayment(true);
-//         setPaymentMethod('Card')
-//       }else{
-//         setShowCardPayment(false);
-//         setPaymentMethod('Cash on Delivery')
-//       }
-//     }
-
-
-//     const handleCardError = (event) => {
-//         let displayError = document.getElementById('card-errors');
-//         if (event.error) {
-//             displayError.textContent = event.error.message;
-//         } else {
-//             displayError.textContent = '';
-//         }
-
-//         if(event.complete){
-//           setBtnDisable(false);
-//         }else{
-//           setBtnDisable(true);
-//         }
-//     }
-	const cartItems1 = useSelector((state) => state.cart.cartItems);
-	const orderItems = [];
-	const cartItemsList = cartItems.map((product) => {
-		const { name, qty, image, price, id } = product;
-		orderItems.push({
-			name,
-			qty,
-			image,
-			price,
-			product: id,
-		})
-	});
-	function handleSubmit() { 
-		if (cartItems.length === 0) {
-			history.push("/");
-		}
-	}
-
-	
-	return (
-		<>
-			<footer>
-				<h3 className="cart-total text-slanted">total : Rs. {cartTotal}</h3>
-				{
-					cartItems.length >= 0 && cartTotal < 100000 ?
-						<Link to="/shipping" onClick={closeCart}>
-							<button className="cart-checkout btn">checkout</button>
-						</Link>
-						:
-						<form onSubmit={ handleSubmit} >
-						<button type = "submit" className="cart-checkout btn" >get approval</button>
-						</form>
-				}
-			</footer>
-		</>
-	)
-}
+  return (
+    <>
+      <footer>
+        <h3 className="cart-total text-slanted">total : Rs. {cartTotal}</h3>
+        {cartItems.length >= 0 && cartTotal < 100000 ? (
+          <Link to="/shipping" onClick={closeCart}>
+            <button className="cart-checkout btn">checkout</button>
+          </Link>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <button type="submit" className="cart-checkout btn">
+              get approval
+            </button>
+          </form>
+        )}
+      </footer>
+    </>
+  );
+};
 
 export default CartTotal;
 
@@ -217,24 +214,19 @@ export default CartTotal;
 // import { createOrder, processPayment } from '../redux/actions/orderActions';
 // import axios from 'axios';
 
-
 // const CartTotal = () => {
 
 //   const history = useHistory()
 
-
 //   const [submitted, setSubmitted] = useState(false);
 //   const [btnDisable, setBtnDisable] = useState(false);
-//   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');  
-//   const [showCardPayment, setShowCardPayment] = useState(false); 
-//   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);  
+//   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
+//   const [showCardPayment, setShowCardPayment] = useState(false);
+//   const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
 //   const user = userInfo[0]._id;
 
-  
- 
 //   const dispatch = useDispatch();
 
-  
 //   const shippingAddress = useSelector((state) => state.cart.shippingAddress);
 //   const { street1, street2, city, state, zip, country } = shippingAddress;
 
@@ -267,7 +259,7 @@ export default CartTotal;
 //   }
 
 //   const [formState,setFormState] = useState({
-//         values:{}       
+//         values:{}
 //     });
 
 //   const handleChange = (event) => {
@@ -280,23 +272,20 @@ export default CartTotal;
 //                 ? event.target.checked
 //                 : event.target.value
 //           }
-          
+
 //         }));
 //       }
 
- 
-
 //   const handleSubmit = async (e) => {
 //         e.preventDefault();
-//         setSubmitted(true); 
+//         setSubmitted(true);
 //         setBtnDisable(true);
 
-       
 //           if(orderItems && shippingAddress && paymentMethod ){
 //             dispatch(createOrder({orderItems, shippingAddress, paymentMethod, user, itemsPrice, shippingPrice, taxPrice, totalPrice}));
 //               history.push('/');
-//           }  
-        
+//           }
+
 //     }
 
 //     const changePaymentMethod = (e) =>{
@@ -308,7 +297,6 @@ export default CartTotal;
 //         setPaymentMethod('Cash on Delivery')
 //       }
 //     }
-
 
 //     const handleCardError = (event) => {
 //         let displayError = document.getElementById('card-errors');
@@ -334,20 +322,20 @@ export default CartTotal;
 
 //          return function cleanupListener() {
 //               cardElement.removeEventListener('change', handleCardError);
-//          } 
-//        }       
+//          }
+//        }
 
 //     }, [showCardPayment]);
 
 //   return(
 //     <>
-//       <NavBar/> 
+//       <NavBar/>
 //       <PageHeading title="Home / Payment"/>
 //       <section className="section section-center">
 //             <div className="container h-100">
 //               <div className="d-flex justify-content-center h-100">
-//                 <div className="user_card content-card payment-page-content">   
-//                   <h4 className="content-heading">Payment Detail</h4>       
+//                 <div className="user_card content-card payment-page-content">
+//                   <h4 className="content-heading">Payment Detail</h4>
 //                   <div className="d-flex justify-content-center form_container auth-page-container payment-page-container">
 //                     <form onSubmit={handleSubmit} autoComplete="off">
 //                       <div className="alert-danger" id="card-errors">
@@ -363,16 +351,16 @@ export default CartTotal;
 //                           <div className="input-group mt-3">
 //                             <div className="card-number">
 //                             <CardElement options={cardElementOptions}/>
-//                             </div>  
+//                             </div>
 //                           </div>
 //                         ):(
 //                         ''
 //                         )
 //                       }
-                      
+
 //                       <div className="d-flex justify-content-center mt-3 login_container">
 //                         <button className="btn login_btn" disabled={btnDisable} >
-                         
+
 //                         {submitted ? (
 //                             <i className="fas fa-spinner fa-spin"></i>
 //                           ): (
@@ -382,7 +370,7 @@ export default CartTotal;
 //                         </button>
 //                       </div>
 //                     </form>
-//                   </div>                  
+//                   </div>
 //                 </div>
 //               </div>
 //             </div>
@@ -392,6 +380,5 @@ export default CartTotal;
 //     </>
 //     )
 // }
-
 
 // export default CartTotal;
