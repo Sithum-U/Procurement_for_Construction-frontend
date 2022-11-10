@@ -1,52 +1,75 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { createOrder, processPayment } from "../redux/actions/orderActions";
+import {
+  createOrder,
+  processPayment,
+  createCartOrder,
+} from "../redux/actions/orderActions";
 import { showCart } from "../redux/actions/cartActions";
 import axios from "axios";
 import { approval } from "../redux/actions/approvalAction";
 
 const CartTotal = () => {
+  const history = useHistory();
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const cartTotal = cartItems
     .reduce((a, i) => a + i.qty * i.price, 0)
     .toFixed(2);
+  const totalPrice = cartTotal;
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [total, setTotal] = useState("");
+  const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
+  const user = userInfo[0]._id;
   const dispatch = useDispatch();
   const closeCart = () => {
     dispatch(showCart(false));
   };
 
+  const cartItems1 = useSelector((state) => state.cart.cartItems1);
+  console.log(cartItems1);
+  const orderItems = [];
+  if (cartItems1) {
+    const cartItemsList = cartItems1.map((product) => {
+      const { name, qty, image, price, id } = product;
+      orderItems.push({
+        name,
+        qty,
+        image,
+        price,
+        product: id,
+      });
+    });
+  }
+
   // const approvalHandle = () => {
   // 	dispatch(approval());
   // }
 
-  const approvalHandle = () => {
-    const url = "http://localhost:5002/cartitems";
-    const credentials = { name, price, quantity, total };
-    axios
-      .post(url, credentials)
-      .then((response) => {
-        const result = response.data;
-        const { status, message } = result;
-        if (status !== "SUCCESS") {
-          dispatch(approval());
-        } else {
-          alert(message);
-          //window.location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const approvalHandle = () => {
+  // 	const url = 'http://localhost:5002/cartitems'
+  // 	const credentials = { name, price, quantity, total }
+  // 	axios.post(url, credentials)
+  // 		.then(response => {
+  // 			const result = response.data;
+  // 			const { status, message } = result;
+  // 			if (status !== 'SUCCESS') {
+  // 				dispatch(approval());
+  // 			}
+  // 			else {
+  // 				alert(message);
+  // 				//window.location.reload();
+  // 			}
+  // 		})
+  // 		.catch(err => {
+  // 			console.log(err);
+  // 		})
+  // }
   // console.log(cartItems);
-
-  const history = useHistory();
 
   //   const [submitted, setSubmitted] = useState(false);
   //   const [btnDisable, setBtnDisable] = useState(false);
@@ -160,25 +183,19 @@ const CartTotal = () => {
   //         }
   //     }
 
-  function handleSubmit() {
-    const cartObj = {
-      name,
-      //   qty,
-      //   image,
-      //   price,
-      //   product: id,
-    };
-    axios
-      .post("https://localhost:5002/cartitems/", cartObj)
-      .then((res) => {
-        alert("Cart Details Added");
-        setName("");
-      })
-      .catch((error) => {
-        console.log(error.message);
-        alert(error.message);
-      });
-  }
+  // function handleSubmit() {
+  // 	if (cartItems.length === 0) {
+  // 		history.push("/");
+  // 	}
+  // }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (orderItems) {
+      dispatch(createCartOrder({ orderItems, totalPrice, user }));
+      history.push("/");
+    }
+  };
 
   return (
     <>

@@ -16,11 +16,7 @@ const FeaturedProducts = () => {
   const products = useSelector((state) => state.allProducts.products);
   const featuredProduct = products.slice(0, 6);
   const renderList = featuredProduct.map((product) => {
-    return (
-      <Paper elevation={5} style={{ back }}>
-        <Product detail={product} key={product._id} />
-      </Paper>
-    );
+    return <Product detail={product} key={product._id} />;
   });
 
   const dispatch = useDispatch();
