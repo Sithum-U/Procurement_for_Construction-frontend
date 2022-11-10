@@ -4,13 +4,6 @@ import Filters from "./Filters";
 import Product from "./Product";
 import { getProducts, resetProducts } from "../redux/actions/productActions";
 import Loading from "../components/Loading";
-import {
-  CardContent,
-  CardMedia,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -42,9 +35,7 @@ const Products = () => {
 
   const renderList = products.map((product) => {
     return (
-      <Paper elevation={5}>
         <Product detail={product} key={product._id} />
-      </Paper>
     );
   });
 

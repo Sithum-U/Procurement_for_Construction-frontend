@@ -4,13 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../redux/actions/productActions";
 import Product from "./Product";
 import Loading from "../components/Loading";
-import {
-  CardContent,
-  CardMedia,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
 
 const FeaturedProducts = () => {
   const products = useSelector((state) => state.allProducts.products);

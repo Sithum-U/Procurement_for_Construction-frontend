@@ -30,7 +30,7 @@ const CartTotal = () => {
     dispatch(showCart(false));
   };
 
-  const cartItems1 = useSelector((state) => state.cart.cartItems1);
+  const cartItems1 = useSelector((state) => state.cart.cartItems);
   console.log(cartItems1);
   const orderItems = [];
   if (cartItems1) {
@@ -45,6 +45,14 @@ const CartTotal = () => {
       });
     });
   }
+console.log(cart);
+  const [approval, setApproval] = useState([]);
+  // useEffect(async () => {
+  //   const responseData = await axios.get(`/cartitems/find/${orderId}`);
+  //   const data = responseData.data;
+  //   setApproval(data.data);
+  // }, []);
+  // console.log(approval);
 
   // const approvalHandle = () => {
   // 	dispatch(approval());
@@ -194,6 +202,8 @@ const CartTotal = () => {
     if (orderItems) {
       dispatch(createCartOrder({ orderItems, totalPrice, user }));
       history.push("/");
+      console.log(orderItems);
+      console.log(localStorage.getItem("cartInfo"));
     }
   };
 
